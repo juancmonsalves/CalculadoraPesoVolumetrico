@@ -1,0 +1,257 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<style>
+			@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+			@font-face
+			{
+			  font-family: "Eras";
+			  src: url("eras.ttf");
+			}
+
+			*
+			{
+			  margin: 5px;
+			  font-family: 'Montserrat';
+
+			}
+
+			body, table, p, ul, li
+			{
+			    background-color: lightgrey;
+			    color: #505051;
+			}
+
+
+
+			h2
+			{
+			  color: #323232;
+			}
+
+			h1
+			{
+			  color: #006974;
+			  font-family: 'Eras';
+			  font-size: 40px;
+			  font-weight: bolder;
+			  word-spacing: 8px;
+			  text-shadow: 2px 2px 3px rgba(176, 176, 185, 1);
+			}
+
+
+			.footable {
+			  width: 100%;
+			  font-size: 15px;
+			  color: #444;
+
+			  border: solid #0a7781 1px;
+			  border-collapse: separate;
+			  border-spacing: 0;
+			}
+
+			.footable > tbody > tr > td, .footable > thead > tr > th {
+			border-left: 1px solid #0a7781;
+			border-top: 1px solid #0a7781;
+			padding: 10px;
+			text-align: left;
+			}
+
+			.footable > thead > tr > th, .footable > thead > tr > td {
+			background-color: #dce9f9;
+			}
+
+			.footable {
+			-moz-border-radius: 6px;
+			-webkit-border-radius: 6px;
+			border-radius: 6px;
+			background-color: #006974;
+			color: #e5f1f2;
+			}
+
+			td:hover {
+			background-color: lightgray;
+			color: #006974;
+			}
+
+			img
+			{
+			  border-radius: 10%;
+			}
+
+
+			.soloLectura
+			{
+			  background-color: #006974;
+			  border: solid #0a7781 0px;
+			  color: white;
+			  font-size: 24px;
+			  text-shadow: 2px 2px 3px rgba(176, 176, 185, 1);
+			}
+
+
+			.resultado
+			{
+			  text-align: center;
+			  border-radius: 6px;
+			  font-size: 35px;
+			  color: white;
+			  background-color: #006974;
+			  border: solid #0a7781 0px;
+			  text-shadow: 2px 2px 3px rgba(176, 176, 185, 1);
+			}
+</style>
+</head>
+<body>
+		<font face="verdana" color="navy">
+		<SCRIPT LANGUAGE="JavaScript">
+		<!--
+		function Limpiar()
+		{
+			document.pesoVol.largo.value="";
+			document.pesoVol.alto.value="";
+			document.pesoVol.ancho.value="";
+			document.pesoVol.PesoVolumetrico.value="";
+			document.pesoVol.PesoFinal.value="";
+			document.pesoVol.pesoReal.value="";
+		}
+		function pesoVolumetrico()
+		{
+			Alto=parseInt(document.pesoVol.alto.value);
+			Largo=parseInt(document.pesoVol.largo.value);
+			Ancho=parseInt(document.pesoVol.ancho.value);
+			pesoReal=parseInt(document.pesoVol.pesoReal.value);			
+			if (Alto > 200 || Largo > 200 || Ancho > 200  || (Alto + Largo + Ancho) > 300 || isNaN(Alto) || isNaN(Largo) || isNaN(Ancho) || isNaN(pesoReal))
+			{
+				alert('El Manual de Encomiendas de los convenios de la Unión Postal Universal (UPU), Artículo RC 115 define los límites de dimensiones de los paquetes: "Las encomiendas no deberán exceder de 2 metros en cualquiera de sus dimensiones ni exceder 3 metros la suma de la longitud y del mayor contorno tomado en un sentido diferente del de la longitud"\n\nRevise que las longitudes no excedan los 200cm ni que su sumatoria exceda los 300cm');
+			}
+			else
+			{
+				Resultado= Largo*Alto*Ancho/document.pesoVol.TipoEnvio.value
+				document.pesoVol.PesoVolumetrico.value=Resultado;
+				document.pesoVol.PesoFinal.value=((Resultado>document.pesoVol.pesoReal.value) ? Resultado : document.pesoVol.pesoReal.value);
+			}
+		}
+
+		function validar(e,tipo) {
+		    tecla = (document.all) ? e.keyCode : e.which;
+		    if (tecla==8) return true; //Tecla de retroceso (para poder borrar)
+		    // dejar la lnea de patron que se necesite y borrar el resto
+		    if(tecla==0){
+		        tecla=9;
+		        return tecla;
+		    }
+		    if(tecla==13){
+		        return tecla;
+		    }
+		    if(tipo==1)
+		    patron =/^([a-z]|[A-Z]|||||||||||||||\')/; // Solo acepta letras
+		    if(tipo==2)
+		    patron = /([0-9\.\-])/; // Solo acepta nmeros
+		    if(tipo==3)
+		    patron = /^([a-z]|[A-Z]|||||||||||||||[0-9]|\-)/; // Acepta nmeros y letras
+		    if(tipo==4)
+		    patron = /\D/; // Solo acepta letras
+		    if(tipo==5)
+		    patron =/^([a-z]|[A-Z]|||||||||||||||\s|\')+$/; // Solo acepta letras y espacio en blanco
+		    if(tipo==6)
+		    patron =/^([a-z]|[A-Z]|[0-9]|||||||||||||||\s|\')+$/; // Solo acepta letras, numeros y espacio en blanco
+		    if(tipo==7)
+		    patron = /([0-9\.])/; // Solo acepta numeros
+		    //
+		    te = String.fromCharCode(tecla);
+		    return patron.test(te);
+		}
+
+		//-->
+		</SCRIPT>
+
+		<center>
+			  <h1>Calculadora de Peso Volumétrico</h1>
+				<p>Esta herramienta le permite realizar el cálculo del peso volumétrico de su envío, mutiplicando las medidas en centímetros del largo  x ancho  x alto y luego dividéndolo entre 6.000 si es un envío internacional o 5.000 si es un envío nacional</p>
+					<table border="0"  cellpadding="25" cellspacing="0" color="red">
+						<tr>
+							<td width="33%" valign="top">
+									<h2>Instrucciones:</h2>
+									<p>Seleccione si el envío es nacional o internacional, luego introducir los siguientes valores en el formulario:</p>
+									<ul>
+										<li>El peso real del paquete que es el peso que indica la balanza en kilogramos</li>
+										<li>El largo en centímetros</li>
+										<li>El ancho en centímetros</li>
+										<li>El alto en centímetros</li>
+										<li>Presionar el botón calcular y ver el peso a cobrar que aparece del lado derecho</li>
+									</ul>
+									<p>Nota: Usar punto (.) como separador en caso de tener decimales.</p>
+							</td>
+							<td>
+
+								<form name="pesoVol" METHOD=POST onSubmit()="pesoVolumetrico()">
+									<table  class="footable" width="53%" > <tbody>
+										<tr>
+											<td>
+												Tipo de Envío:
+											</td>
+											<td>
+												<input type="radio" name="TipoEnvio" value="5000" checked>Nacional (EEB)<br>
+												<input type="radio" name="TipoEnvio" value="6000" checked>Internacional (EMS y Bulto Postal)<br>
+											</td>
+										</tr>
+										<tr>
+										<tr>
+											<td>
+												Peso Real (kgs):
+											</td>
+											<td>
+												<input type="text" name="pesoReal" size="10" onkeypress="return validar(event,7)"  onchange="return validar(event,7)">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Largo (cm):
+											</td>
+											<td>
+												<input type="text" name="largo" size="10" onkeypress="return validar(event,7)"  onchange="return validar(event,7)">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Ancho (cm):
+											</td>
+											<td>
+												<input type="text" name="ancho" size="10" onkeypress="return validar(event,7)"  onchange="return validar(event,7)">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Alto (cm):
+											</td>
+											<td>
+												<input type="text" name="alto" size="10" onkeypress="return validar(event,7)"  onchange="return validar(event,7)">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Peso Volumétrico (m3):
+											</td>
+											<td>
+												<input type="text" name="PesoVolumetrico" readonly="readonly" size="5" class="soloLectura"/>
+											</td>
+										</tr>
+									</tbody></table>
+							</td>
+							<td width="10%">
+								<center>
+									<img src="logo.jpeg" border="0" width="150">
+									<p><b><font size="+3" color="black">Peso a cobrar por este envío:<br><input type="text" name="PesoFinal" readonly="readonly" size="5" class="resultado"></font></b></p>
+									<!--img src="cajita.png" border="0"-->
+								</center>
+							</td>
+						</tr>
+					</table>
+					<input type="button" value="Calcular" onclick="pesoVolumetrico()">
+					<input type="button" value="Limpiar" action="reset" onclick="Limpiar()">
+				</form>
+		</center>
+	</body>
+</html>
